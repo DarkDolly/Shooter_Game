@@ -1,3 +1,19 @@
+###############################
+#Unreal Engine Generated Files#
+###############################
+*Intermediate/
+*Binaries/
+*Saved/
+*DerivedDataCache/
+*Build/
+Content/StarterContent/
+Game Packaged TEST/
+
+###############################
+#Visual Studio Generated files#
+###############################
+*.VC.db
+
 # Visual Studio 2015 user specific files
 .vs/
 
@@ -72,3 +88,4 @@ Plugins/*/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+SimpleShooter/Content/AssetPacks/
