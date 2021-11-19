@@ -2,7 +2,9 @@
 
 
 #include "Gun.h"
+
 #include "Components/StaticMeshComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AGun::AGun()
@@ -32,3 +34,9 @@ void AGun::Tick(float DeltaTime)
 
 }
 
+void AGun::PullTrigger()
+{
+	UE_LOG(LogTemp, Warning, TEXT("You've pulled the trigger"));
+
+	UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, Mesh, FName("MuzzleFlashSocket"));
+}
