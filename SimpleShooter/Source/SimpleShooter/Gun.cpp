@@ -49,5 +49,19 @@ void AGun::PullTrigger()
 	OUT FRotator ViewpointRotation;
 	OwnerController->GetPlayerViewPoint(ViewpointLocation, ViewpointRotation);
 
-	DrawDebugCamera(GetWorld(), ViewpointLocation, ViewpointRotation, 90, 2, FColor::Cyan, true);
+	// DrawDebugCamera(GetWorld(), ViewpointLocation, ViewpointRotation, 90, 2, FColor::Cyan, true);
+
+	FVector End = ViewpointLocation + ViewpointRotation.Vector() * MaxRange; // Calculating the end point of our line trace (the end of the vector that comes out of the viewport)
+	// TODO LineTrace
+	OUT FHitResult Hit;
+	bool bSuccess = GetWorld()->LineTraceSingleByChannel(Hit, ViewpointLocation, End, ECollisionChannel::ECC_GameTraceChannel1);
+	if (bSuccess)
+	{
+		DrawDebugLine(GetWorld(), ViewpointLocation, End, FColor::Cyan, true, 10);
+		// DrawDebugPoint(GetWorld(), End, 20, FColor::Cyan, true, 10);
+	}
+
+
+
+	
 }
