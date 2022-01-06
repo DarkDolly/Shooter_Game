@@ -17,6 +17,8 @@ AShooterCharacter::AShooterCharacter()
 void AShooterCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	Health = MaxHealth;
 	
 	Gun = GetWorld()->SpawnActor<AGun>(GunClass);
 	GetMesh()->HideBoneByName(FName("weapon_r"), EPhysBodyOp::PBO_None);
@@ -70,6 +72,31 @@ void AShooterCharacter::LookRightRate(float AxisValue)
 void AShooterCharacter::Shoot()
 {
 	Gun->PullTrigger();
+}
+
+
+float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+	float DamageToApply = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+
+	DamageToApply = FMath::Min(Health, DamageToApply);
+	Health = Health - DamageToApply;
+	UE_LOG(LogTemp, Warning, TEXT("%s health is %f"), *GetActorLabel(), Health);
+
+	return DamageToApply;
+}
+
+bool AShooterCharacter::IsDead() const
+{
+	// if (Health <= 0)
+	// {
+	// 	return true;
+	// }
+	// else
+	// {
+	// 	return false;
+	// }
+	return Health <= 0;
 }
 
 // void AShooterCharacter::LookUp(float AxisValue)

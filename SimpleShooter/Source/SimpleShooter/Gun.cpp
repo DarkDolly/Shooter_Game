@@ -57,7 +57,7 @@ void AGun::PullTrigger()
 	bool bSuccess = GetWorld()->LineTraceSingleByChannel(Hit, ViewpointLocation, End, ECollisionChannel::ECC_GameTraceChannel1);
 	if (bSuccess)
 	{
-		DrawDebugLine(GetWorld(), ViewpointLocation, End, FColor::Cyan, true, 10);
+		// DrawDebugLine(GetWorld(), ViewpointLocation, End, FColor::Cyan, true, 10);
 		// DrawDebugPoint(GetWorld(), End, 20, FColor::Cyan, true, 10);
 
 		FVector ShotDirection = -ViewpointRotation.Vector();
@@ -67,7 +67,7 @@ void AGun::PullTrigger()
 		if (ActorHit != nullptr)
 		{
 			FPointDamageEvent DamageEvent(BulletDamage, Hit, ShotDirection, nullptr);
-			TakeDamage(BulletDamage, DamageEvent, OwnerController, this);
+			ActorHit->TakeDamage(BulletDamage, DamageEvent, OwnerController, this);
 		}
 	}
 }
