@@ -54,7 +54,7 @@ void AGun::PullTrigger()
 	FVector End = ViewpointLocation + ViewpointRotation.Vector() * MaxRange; // Calculating the end point of our line trace (the end of the vector that comes out of the viewport)
 	// TODO LineTrace
 	OUT FHitResult Hit;
-	bool bSuccess = GetWorld()->LineTraceSingleByChannel(Hit, ViewpointLocation, End, ECollisionChannel::ECC_GameTraceChannel1);
+	bool bSuccess = GetWorld()->LineTraceSingleByChannel(Hit, /*ViewportLocation*/Mesh->GetSocketLocation(FName("BulletSpawnPoint")), End, ECollisionChannel::ECC_GameTraceChannel1);
 	if (bSuccess)
 	{
 		// DrawDebugLine(GetWorld(), ViewpointLocation, End, FColor::Cyan, true, 10);
