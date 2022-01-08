@@ -39,6 +39,10 @@ void AGun::PullTrigger()
 {
 	UE_LOG(LogTemp, Warning, TEXT("You've pulled the trigger"));
 
+	bool IsReadyToFire = FPlatformTime::Seconds() - LastFireTime > FireDelay;
+
+	if (IsReadyToFire)
+	{
 	UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, Mesh, FName("MuzzleFlashSocket"));
 
 	APawn* OwnerPawn = Cast<APawn>(GetOwner());
@@ -72,5 +76,7 @@ void AGun::PullTrigger()
 			FPointDamageEvent DamageEvent(BulletDamage, Hit, ShotDirection, nullptr);
 			ActorHit->TakeDamage(BulletDamage, DamageEvent, OwnerController, this);
 		}
+	}
+		LastFireTime = FPlatformTime::Seconds();
 	}
 }

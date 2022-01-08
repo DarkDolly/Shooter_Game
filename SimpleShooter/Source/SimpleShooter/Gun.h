@@ -43,4 +43,9 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float BulletDamage = 20.f;
+
+	UPROPERTY(EditAnywhere)
+	float FireDelay = 1.0f;
+
+	double LastFireTime = 0;
 };
