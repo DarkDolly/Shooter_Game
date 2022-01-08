@@ -54,7 +54,7 @@ private:
 	UPROPERTY()
 	AGun* Gun;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditAnywhere)
 	float MaxHealth = 100.f;
 
 	UPROPERTY(VisibleAnywhere)
