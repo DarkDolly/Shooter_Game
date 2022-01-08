@@ -40,6 +40,9 @@ private:
 	void LookUpRate(float AxisValue);
 	void LookRightRate(float AxisValue);
 
+	//float FireDelay = 1.0f;
+	//double LastFireTime = 0;
+
 	// void LookUp(float AxisValue);
 
 	UPROPERTY(EditAnywhere)
