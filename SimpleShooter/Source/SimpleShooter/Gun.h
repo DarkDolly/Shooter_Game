@@ -36,7 +36,19 @@ private:
 	UParticleSystem* MuzzleFlash;
 
 	UPROPERTY(EditAnywhere)
+	USoundBase* MuzzleSound;
+
+	UPROPERTY(EditAnywhere)
+	USoundBase* ImpactSound;
+
+	UPROPERTY(EditAnywhere)
+	USoundBase* ImpactSoundPawn;
+
+	UPROPERTY(EditAnywhere)
 	UParticleSystem* BulletHitSplash;
+
+	UPROPERTY(EditAnywhere)
+	UParticleSystem* BulletHitSplashPawn;
 
 	UPROPERTY(EditAnywhere)
 	float MaxRange = 10000.f;
@@ -48,4 +60,8 @@ private:
 	float FireDelay = 1.0f;
 
 	double LastFireTime = 0;
+
+	bool GunTrace(FHitResult& Hit, FVector& ShotDirection);
+
+	AController* GetOwnerController() const;
 };
