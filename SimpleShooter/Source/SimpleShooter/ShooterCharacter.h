@@ -7,6 +7,7 @@
 #include "ShooterCharacter.generated.h"
 
 class AGun;
+class UAudioComponent;
 
 UCLASS()
 class SIMPLESHOOTER_API AShooterCharacter : public ACharacter
@@ -27,6 +28,9 @@ public:
 
 	UFUNCTION(BlueprintPure)
 	bool IsDead() const;
+
+	UFUNCTION(BlueprintPure)
+	float GetHealthPercent() const;
 
 	void Shoot();
 
@@ -59,4 +63,7 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	float Health;
+
+	UAudioComponent* DeathSound = nullptr;
+	UAudioComponent* ShotSound = nullptr;
 };

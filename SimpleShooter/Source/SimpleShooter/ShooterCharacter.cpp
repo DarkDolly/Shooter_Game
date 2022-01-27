@@ -5,6 +5,7 @@
 #include "Gun.h"
 #include "Components/CapsuleComponent.h"
 #include "SimpleShooterGameModeBase.h"
+#include "Components/AudioComponent.h"
 
 
 // Sets default values
@@ -21,6 +22,9 @@ void AShooterCharacter::BeginPlay()
 	Super::BeginPlay();
 
 	Health = MaxHealth;
+
+	DeathSound = Cast<UAudioComponent>(GetDefaultSubobjectByName(TEXT("DeathSound")));
+	ShotSound = Cast<UAudioComponent>(GetDefaultSubobjectByName(TEXT("ShotSound")));
 	
 	Gun = GetWorld()->SpawnActor<AGun>(GunClass);
 	GetMesh()->HideBoneByName(FName("weapon_r"), EPhysBodyOp::PBO_None);
@@ -87,10 +91,26 @@ float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const& Dama
 {
 	float DamageToApply = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 
-	DamageToApply = FMath::Min(Health, DamageToApply);
-	Health = Health - DamageToApply;
-	UE_LOG(LogTemp, Warning, TEXT("%s health is %f"), *GetActorLabel(), Health);
-
+	if (!IsDead())
+	{
+		if (Health < 21)
+		{
+			if (DeathSound != nullptr)
+			{
+				DeathSound->Play();
+			}
+		}
+		if (Health > 22)
+		{
+			if (ShotSound != nullptr)
+			{
+				ShotSound->Play();
+			}
+		}
+		DamageToApply = FMath::Min(Health, DamageToApply);
+		Health = Health - DamageToApply;
+		UE_LOG(LogTemp, Warning, TEXT("%s health is %f"), *GetActorLabel(), Health);
+	}
 	if (IsDead())
 	{
 		ASimpleShooterGameModeBase* GameMode = GetWorld()->GetAuthGameMode<ASimpleShooterGameModeBase>();
@@ -116,6 +136,11 @@ bool AShooterCharacter::IsDead() const
 	// 	return false;
 	// }
 	return Health <= 0;
+}
+
+float AShooterCharacter::GetHealthPercent() const
+{
+	return Health * 0.01;
 }
 
 // void AShooterCharacter::LookUp(float AxisValue)
