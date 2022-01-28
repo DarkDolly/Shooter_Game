@@ -10,7 +10,10 @@ void AKillEmAllGameMode::PawnKilled(APawn* DeadPawn)
 {
 	Super::PawnKilled(DeadPawn);
 
-	Enemies = Enemies - 1;
+	if (DeadPawn->GetController() != nullptr)
+	{
+		Enemies = Enemies - 1;
+	}
 
 	APlayerController* PlayerController = Cast<APlayerController>(DeadPawn->GetController());
 	if (PlayerController != nullptr)

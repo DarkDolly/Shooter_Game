@@ -25,7 +25,7 @@ protected:
 private:
 	void EndGame(bool bIsPlayerWinner);
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(EditAnywhere)
 	int32 Enemies = 10;
 
 };
