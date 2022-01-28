@@ -10,6 +10,8 @@ void AKillEmAllGameMode::PawnKilled(APawn* DeadPawn)
 {
 	Super::PawnKilled(DeadPawn);
 
+	Enemies = Enemies - 1;
+
 	APlayerController* PlayerController = Cast<APlayerController>(DeadPawn->GetController());
 	if (PlayerController != nullptr)
 	{
@@ -32,6 +34,11 @@ void AKillEmAllGameMode::PawnKilled(APawn* DeadPawn)
 			// return
 
 	// End game
+}
+
+int32 AKillEmAllGameMode::GetEnemiesLeft()
+{
+	return Enemies;
 }
 
 void AKillEmAllGameMode::EndGame(bool bIsPlayerWinner)

@@ -140,7 +140,7 @@ bool AShooterCharacter::IsDead() const
 
 float AShooterCharacter::GetHealthPercent() const
 {
-	return Health * 0.01;
+	return Health / MaxHealth;
 }
 
 // void AShooterCharacter::LookUp(float AxisValue)

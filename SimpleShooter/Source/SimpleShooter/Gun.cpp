@@ -45,7 +45,7 @@ void AGun::PullTrigger()
 	if (IsReadyToFire)
 	{
 		UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, Mesh, FName("MuzzleFlashSocket"));
-		UGameplayStatics::SpawnSoundAttached(MuzzleSound, Mesh, FName("MuzzkeFlashSocket"));
+		UGameplayStatics::SpawnSoundAttached(MuzzleSound, Mesh, FName("MuzzleFlashSocket"));
 
 		OUT FHitResult Hit;
 		OUT FVector ShotDirection;

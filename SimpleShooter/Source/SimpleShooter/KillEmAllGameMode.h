@@ -17,8 +17,15 @@ class SIMPLESHOOTER_API AKillEmAllGameMode : public ASimpleShooterGameModeBase
 public:
 	virtual void PawnKilled(APawn* DeadPawn) override;
 
+	UFUNCTION(BlueprintPure)
+	int32 GetEnemiesLeft();
+
 protected:
 
 private:
 	void EndGame(bool bIsPlayerWinner);
+
+	UPROPERTY(VisibleAnywhere)
+	int32 Enemies = 10;
+
 };
