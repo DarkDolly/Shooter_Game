@@ -30,6 +30,8 @@ void AShooterCharacter::BeginPlay()
 	GetMesh()->HideBoneByName(FName("weapon_r"), EPhysBodyOp::PBO_None);
 	Gun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, FName("WeaponSocket"));
 	Gun->SetOwner(this);
+
+	//bIsReadyToHeal = (FPlatformTime::Seconds() - LastTakeDamage) > HealDelay; //Healing System
 }
 
 // Called every frame
@@ -37,6 +39,11 @@ void AShooterCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	/*if (bIsReadyToHeal || Health < MaxHealth) //Healing System
+	{
+		Health = Health + 0.01;
+		LastTakeDamage = FPlatformTime::Seconds() + 4;
+	}*/
 }
 
 // Called to bind functionality to input
@@ -121,6 +128,7 @@ float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const& Dama
 		DetachFromControllerPendingDestroy();
 		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
+	/*LastTakeDamage = FPlatformTime::Seconds();*/ //Healing System
 
 	return DamageToApply;
 }

@@ -66,4 +66,9 @@ private:
 
 	UAudioComponent* DeathSound = nullptr;
 	UAudioComponent* ShotSound = nullptr;
+
+	//Healing System
+	/*bool bIsReadyToHeal;
+	double LastTakeDamage = 0;
+	float HealDelay = 5;*/
 };
